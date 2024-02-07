@@ -11,6 +11,7 @@ services:
       MYSQL_USER: wpuser
       MYSQL_PASSWORD: wporetania
     volumes:
+    #????????????? db_data un fichero interno de docker?????
       - db_data:/var/lib/mysql
     networks:
       - wpred   
@@ -30,6 +31,7 @@ services:
       WORDPRESS_DB_PASSWORD: wporetania
       WORDPRESS_DB_NAME: wordpress
     volumes:
+      # guarda todo lo que haya en var/www/html en el directorio actual de trabajo
       - ./:/var/www/html
       #Redes a usar
     networks:
@@ -41,6 +43,7 @@ services:
     depends_on:
       - db
     restart: always
+    #puerto externo: puerto interno
     ports: 
       - 8095:80
     environment:
@@ -48,9 +51,11 @@ services:
       MYSQL_ROOT_PASSWORD: oretania
     networks:
       - wpred
+#para poder navegar por internet dentro del contenedor
 networks:
   wpred:
     driver: bridge
 
 volumes:
+#??????????
   db_data:
